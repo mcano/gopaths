@@ -1,0 +1,15 @@
+#!/opt/homebrew/bin/bash
+
+id=$1
+declare -A paths
+
+file="$HOME/.gopaths"
+while IFS="=" read -r key value; do
+    paths[$key]="$value"
+done < "$file"
+
+if [[ -v paths[$id] ]]; then
+    ch_dir_path="$HOME/${paths[$id]}"
+    echo $ch_dir_path
+    eval cd $ch_dir_path
+fi
